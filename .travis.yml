@@ -1,0 +1,18 @@
+os: osx
+language: cpp
+
+compiler:
+    - clang
+
+install:
+  - .ci/install.sh
+
+script:
+  - conan config install https://github.com/includeos/conan_config.git
+  - conan create . includeos/mactest -pr apple-clang-10-macos-toolchain
+  - VERSION=\$(conan inspect -a version . | cut -d " " -f 2)
+  - conan search vmbuild/\$VERSION@includeos/mactest
+  - conan upload --all vmbuild/\$VERSION@includeos/mactest -r includeos-test
+
+notifications:
+  slack: includeos:qyy8ZShmREcJsl6vD0Ae0Qsa
