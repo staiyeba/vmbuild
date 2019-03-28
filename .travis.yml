@@ -18,7 +18,7 @@ script:
     fi
     if [ -n "$TRAVIS_TAG" ]; then
       conan copy --all vmbuild/$VERSION@includeos/maclatest includeos/macstable
-      conan upload --all vmbuild/$VERSION@includeos/maclatest -r includeos-test
+      conan upload --all vmbuild/$VERSION@includeos/macstable -r includeos-test
     fi
 
 notifications:
