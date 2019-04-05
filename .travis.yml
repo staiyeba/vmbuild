@@ -9,9 +9,8 @@ install:
 
 script:
   - conan config install https://github.com/includeos/conan_config.git
-  - conan create . includeos/maclatest -pr apple-clang-10-macos-toolchain
+  - conan create . includeos/latest -pr apple-clang-10-macos-toolchain
   - VERSION=$(conan inspect -a version . | cut -d " " -f 2)
-  - conan search vmbuild/$VERSION@includeos/latest
   - |
     if [ "$TRAVIS_BRANCH" == "master" ]; then
       conan upload --all vmbuild/$VERSION@includeos/latest -r includeos
